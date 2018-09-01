@@ -1,0 +1,11 @@
+.container-drag {
+  display: flex;
+  flex-direction: row;
+}
+
+.board {
+  height: 100px;
+  width: 100px;
+  border: solid 1px black;
+  margin: 10px;
+}

@@ -35,20 +35,20 @@ class AppDragDropDemo extends Component {
   onDrop = (ev, cat) => {
     let id = ev.dataTransfer.getData('text');
     let tasks = this.state.tasks.filter((task) => {
-      if (task.name == id) {
+      if (task.name === id) {
         task.category = cat;
       }
       return task;
     });
 
-    this.setState({
-      ...this.state,
+    this.setState((prevState) => ({
+      ...prevState,
       tasks
-    });
+    }));
   };
 
   render() {
-    var tasks = {
+    const tasks = {
       wip: [],
       complete: []
     };
@@ -68,25 +68,27 @@ class AppDragDropDemo extends Component {
     });
 
     return (
-      <div className="container-drag">
-        <h2 className="header">DRAG & DROP DEMO</h2>
-        <div
-          className="wip"
-          onDragOver={(e) => this.onDragOver(e)}
-          onDrop={(e) => {
-            this.onDrop(e, 'wip');
-          }}
-        >
-          <span className="task-header">WIP</span>
-          {tasks.wip}
-        </div>
-        <div
-          className="droppable"
-          onDragOver={(e) => this.onDragOver(e)}
-          onDrop={(e) => this.onDrop(e, 'complete')}
-        >
-          <span className="task-header">COMPLETED</span>
-          {tasks.complete}
+      <div>
+        <h2>DRAG & DROP DEMO</h2>
+        <div className="container-drag">
+          <div
+            className="board"
+            onDragOver={(e) => this.onDragOver(e)}
+            onDrop={(e) => {
+              this.onDrop(e, 'wip');
+            }}
+          >
+            <span className="task-header">WIP</span>
+            {tasks.wip}
+          </div>
+          <div
+            className="board"
+            onDragOver={(e) => this.onDragOver(e)}
+            onDrop={(e) => this.onDrop(e, 'complete')}
+          >
+            <span className="task-header">COMPLETED</span>
+            {tasks.complete}
+          </div>
         </div>
       </div>
     );
